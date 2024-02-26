@@ -16,7 +16,6 @@ const Accordion = () => {
   };
   const handleMultipleSelection = (getCurrentId: number) => {
     const cpyMultipleSelection = [...multipleSelection];
-    // let newItem = []
     const indexOfCurrentId = cpyMultipleSelection.indexOf(getCurrentId);
     if (indexOfCurrentId === -1) {
       cpyMultipleSelection.push(getCurrentId);
@@ -24,7 +23,7 @@ const Accordion = () => {
       cpyMultipleSelection.splice(indexOfCurrentId, 1);
     }
 
-    console.log(cpyMultipleSelection);
+    console.log(multipleSelection);
     setMultipleSelection(cpyMultipleSelection);
   };
   return (
@@ -49,33 +48,35 @@ const Accordion = () => {
               : "Single Selection"}
           </button>
         </div>
-        {data.accordionData.map((singleItem: singleObjType) => {
-          return (
-            <>
-              <div className="singleAccordion">
-                <div
-                  className="accordion_title"
-                  onClick={
-                    enableMultipleSelection
-                      ? () => handleMultipleSelection(singleItem.id)
-                      : () => handleSingleSelection(singleItem.id)
-                  }
-                >
-                  <span>{singleItem.question}</span>
-                  <span>+</span>
-                </div>
-                {singleSelection === singleItem.id ||
-                multipleSelection.indexOf(singleItem.id) !== -1 ? (
-                  <div className="accordion_body">
-                    <p>{singleItem.answer}</p>
+        {data &&
+          data.accordionData.length > 0 &&
+          data.accordionData.map((singleItem: singleObjType, index: number) => {
+            return (
+              <>
+                <div className="singleAccordion" key={index}>
+                  <div
+                    className="accordion_title"
+                    onClick={
+                      enableMultipleSelection
+                        ? () => handleMultipleSelection(singleItem.id)
+                        : () => handleSingleSelection(singleItem.id)
+                    }
+                  >
+                    <span>{singleItem.question}</span>
+                    <span>+</span>
                   </div>
-                ) : (
-                  ""
-                )}
-              </div>
-            </>
-          );
-        })}
+                  {singleSelection === singleItem.id ||
+                  multipleSelection.indexOf(singleItem.id) !== -1 ? (
+                    <div className="accordion_body">
+                      <p>{singleItem.answer}</p>
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                </div>
+              </>
+            );
+          })}
       </div>
     </>
   );
