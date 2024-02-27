@@ -1,33 +1,53 @@
 import { useEffect, useState } from "react";
 import "./style.css";
 const RandomColorGenerator = () => {
-  const [typeOfColor, setTypeOfColor] = useState("hex");
-  const [color, setColor] = useState("pink");
-   
-  const handleHexColor = () => {
-    const hexColor = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "A", "B", "C", "D", "E"];
+  const [typeOfColor, setTypeOfcolor] = useState<string>("hex");
+  const [color, setColor] = useState<string>("pink");
+
+  const handleHexColor = (): void => {
+    const hexColorArray = [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+    ];
     let newColor = "";
     for (let i = 0; i < 6; i++) {
-      newColor += hexColor[Math.floor(Math.random() * hexColor.length)];
+      newColor +=
+        hexColorArray[Math.floor(Math.random() * hexColorArray.length)];
     }
-    console.log(color);
+    console.log(`#${newColor}`);
     setColor(`#${newColor}`);
   };
-  const handleRGBColor = () => {
+  const handleRGBColor = (): void => {
     const r = Math.floor(Math.random() * 255);
     const g = Math.floor(Math.random() * 255);
     const b = Math.floor(Math.random() * 255);
     setColor(`rgb(${r},${g},${b})`);
+    console.log(`rgb(${r},${g},${b})`);
   };
+
   useEffect(() => {
     if (typeOfColor === "hex") handleHexColor();
     else handleRGBColor();
   }, [typeOfColor]);
+
   return (
     <div className="container" style={{ background: color }}>
       <div className="buttonContainer">
-        <button onClick={() => setTypeOfColor("hex")}>Create Hex Color</button>
-        <button onClick={() => setTypeOfColor("rgb")}>Create RGB Color</button>
+        <button onClick={() => setTypeOfcolor("hex")}>Create Hex Color</button>
+        <button onClick={() => setTypeOfcolor("rgb")}>Create RGB Color</button>
         <button
           onClick={typeOfColor === "hex" ? handleHexColor : handleRGBColor}
         >
@@ -35,7 +55,7 @@ const RandomColorGenerator = () => {
         </button>
       </div>
       <div className="textContainer">
-        <h3>{typeOfColor === "hex" ? "HEX" : "RGB"} Color</h3>
+        <h3> {typeOfColor === "hex" ? "hex" : "rgb"}Color</h3>
         <h2>{color}</h2>
       </div>
     </div>
