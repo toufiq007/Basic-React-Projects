@@ -4,17 +4,20 @@ import { useState } from "react";
 const DynamicInput = () => {
   const initialArray = [{ name: "" }];
   const [value, setValue] = useState(initialArray);
-  const [inputValue, setInputValue] = useState("");
   const handleClick = () => {
     const newArray = [...value, { name: "" }];
     setValue(newArray);
   };
-  const handleRemove = (Newindex: any) => {
+  const handleRemove = (index: number) => {
     const newArray = [...value];
-    newArray.splice(Newindex, 1);
+    newArray.splice(index, 1);
     setValue(newArray);
   };
-  console.log(value);
+  const handleChange = (e: React.ChangeEvent, index: number) => {
+    const values = [...value];
+    values[index][e.target.name] = e.target.value;
+    setValue(values);
+  };
   return (
     <div>
       <h2>Dynamic input</h2>
@@ -24,20 +27,36 @@ const DynamicInput = () => {
             return (
               <>
                 <input
+                  name="name"
                   key={index}
                   style={{ fontSize: "14px", padding: "7px 14px" }}
                   type="text"
-                  onChange={(e) => setInputValue(e.target.value)}
-                  value={inputValue}
+                  value={singleValue.name}
+                  onChange={(e) => handleChange(e, index)}
                 />
                 {value.length > 1 && (
-                  <button onClick={() => handleRemove(index)}>remove</button>
+                  <button
+                    style={{
+                      background: "pink",
+                      fontSize: "12px",
+                      marginLeft: "10px",
+                      marginBottom: "5px",
+                    }}
+                    onClick={() => handleRemove(index)}
+                  >
+                    remove
+                  </button>
                 )}
                 <br />
               </>
             );
           })}
-        <button onClick={handleClick}>Add field</button>
+        <button
+          style={{ background: "lightGreen", marginTop: "20px" }}
+          onClick={handleClick}
+        >
+          Add field
+        </button>
       </div>
     </div>
   );
