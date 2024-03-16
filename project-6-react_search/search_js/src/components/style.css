@@ -1,11 +1,9 @@
 .searchShowItems p:hover {
-  background: #b2aaaa;
+  background: #e8e3e3;
   border-left: "4px solid #blue";
 }
 p {
-  background: #ddd;
-  width: 380px;
-  padding: 0.8rem;
-  text-align: center;
+  padding: 0.3rem;
+  text-align: left;
   transition: all 0.2s ease;
 }

@@ -1,16 +1,16 @@
-
-import './App.css'
-import SearchBox from './components/SearchBox'
-import StaticSearchBox from './components/StaticSearchBox'
+import "./App.css";
+import AutoComplete from "./components/AutoComplete";
+import SearchBox from "./components/SearchBox";
+import StaticSearchBox from "./components/StaticSearchBox";
 
 function App() {
-
   return (
     <>
       {/* <SearchBox/> */}
-      <StaticSearchBox/>
+      <StaticSearchBox />
+      {/* <AutoComplete /> */}
     </>
-  )
+  );
 }
 
-export default App
+export default App;

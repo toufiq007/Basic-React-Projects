@@ -1,54 +1,15 @@
-import { TextField } from "@mui/material";
 import "./style.css";
 import { useEffect, useState } from "react";
 import SearchBox from "./SearchBox";
 import ShowItems from "./ShowItems";
-
-const personList = [
-  {
-    id: 1,
-    name: "Toufiq Limon",
-  },
-  {
-    id: 2,
-    name: "Rajib Ahmed",
-  },
-  {
-    id: 3,
-    name: "Fazle Rabby Ismam",
-  },
-  {
-    id: 4,
-    name: "Tarek Mahbub Toru",
-  },
-  {
-    id: 5,
-    name: "Imran Hassan",
-  },
-  {
-    id: 6,
-    name: "Nahid Hasan",
-  },
-  {
-    id: 7,
-    name: "Taskirul Taysir",
-  },
-  {
-    id: 8,
-    name: "Asifur Rahman",
-  },
-  {
-    id: 9,
-    name: "Mehedi Hasan",
-  },
-  {
-    id: 10,
-    name: "Sagor Mabbub",
-  },
-];
-
+import { top100Films } from "../data/data";
 const StaticSearchBox = () => {
   const [searchValue, setSearchValue] = useState("");
+  const [selectedValue, setSelectedValue] = useState("");
+
+  const handleClick = (value) => {
+    setSearchValue(value);
+  };
   return (
     <div
       style={{
@@ -60,8 +21,17 @@ const StaticSearchBox = () => {
       }}
     >
       <h1>Search here</h1>
-      <SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
-      <ShowItems filterdArray={personList} searchValue={searchValue} />
+      <SearchBox
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
+        selectedValue={selectedValue}
+      />
+      <ShowItems
+        filterdArray={top100Films}
+        searchValue={searchValue}
+        setSelectedValue={setSelectedValue}
+        handleClick={handleClick}
+      />
     </div>
   );
 };
