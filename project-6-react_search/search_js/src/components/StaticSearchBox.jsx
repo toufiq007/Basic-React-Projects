@@ -10,6 +10,9 @@ const StaticSearchBox = () => {
   const handleClick = (value) => {
     setSearchValue(value);
   };
+  const reFilteredArray = top100Films.filter((film) =>
+    film.label.toLowerCase().includes(searchValue.toLowerCase())
+  );
   return (
     <div
       style={{
@@ -27,7 +30,7 @@ const StaticSearchBox = () => {
         selectedValue={selectedValue}
       />
       <ShowItems
-        filterdArray={top100Films}
+        filterdArray={reFilteredArray}
         searchValue={searchValue}
         setSelectedValue={setSelectedValue}
         handleClick={handleClick}
